@@ -4,7 +4,7 @@ The frontend is powered by Dropzone.js that enables features like drag-and-drop,
 ## Prerequisite
 
 * Make sure the server running Flask app has sufficient IAM permissions to generate S3 pre-signed post.
-* Make sure the destination bucket allows Cross-Origin Resource Sharing (CORS).        
+* Make sure the destination bucket allows Cross-Origin Resource Sharing (CORS).
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
