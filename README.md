@@ -2,6 +2,27 @@ This is a Flask app that demonstrates how to upload file(s) directly to S3 using
 The frontend is powered by Dropzone.js that enables features like drag-and-drop, queued upload, etc.
 If you want to implement your uploader differently, please check the official Dropzone.js documentation and change the JavaScript code accordingly.
 
+```
+┌──────┐                       ┌──────┐          ┌──┐
+│Client│                       │Server│          │S3│
+└──┬───┘                       └──┬───┘          └┬─┘
+   │   POST /get-presigned-post   │               │  
+   │ ─────────────────────────────>               │  
+   │                              │               │  
+   │ RETURN S3 signed post in JSON│               │  
+   │ <─────────────────────────────               │  
+   │                              │               │  
+   │     POST file to S3 URL with signed post     │  
+   │ ─────────────────────────────────────────────>  
+   │                              │               │  
+   │            RETURN 200 confirmation           │  
+   │ <─────────────────────────────────────────────  
+┌──┴───┐                       ┌──┴───┐          ┌┴─┐
+│Client│                       │Server│          │S3│
+└──────┘                       └──────┘          └──┘
+
+```
+
 ## Prerequisite
 
 * Make sure the server running Flask app has sufficient IAM permissions to generate S3 pre-signed post.
