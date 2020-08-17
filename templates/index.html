@@ -55,6 +55,10 @@
         addRemoveLinks: true,
         createImageThumbnails: false,
         previewTemplate: previewTemplate,
+        <!--Support folder upload (not compatible in some browsers)-->
+        init: function() {
+          this.hiddenFileInput.setAttribute("webkitdirectory", true);
+        },
         accept: function (file, done) {
           const req = new XMLHttpRequest();
           req.onreadystatechange = () => {
@@ -71,7 +75,9 @@
           };
           req.open("POST",'/get-presigned-post');
           req.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-          req.send();
+          req.send(JSON.stringify({
+            "fp": file.webkitRelativePath,
+          }));
         },
       });
     
